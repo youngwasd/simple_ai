@@ -1,66 +1,80 @@
-import { config } from "dotenv";
-import OpenAI from "openai";
-import readline from "readline";
+//import dotenv from "dotenv"; // importing like this causes problems
+// import OpenAI from "openai";
+// import readline from "readline";
 
-config();
+//dotenv.config();
 
-const openai = new OpenAI({ apiKey: process.env.API_KEY });
+//const API_KEY = process.env.API_KEY;
 
-// function sendMessage() {
-//     var userInput = document.getElementById("userInput").value;
-//     displayMessage("User", userInput, "user-message");
+// const openai = new OpenAI({ apiKey: process.env.API_KEY });
 
-//     openai.chat.completions.create({
+const submitButton = document.querySelector('#submit');
+const outputElement = document.querySelector('#output');
+const inputElem = document.querySelector('input');
+const historyElem = document.querySelector('.history');
+
+// https://www.youtube.com/watch?v=05ssqx-SZT0 40:58
+
+async function getMessage() {
+    const options = {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${API_KEY}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: inputElem.value}],
+            max_tokens: 100
+        })
+    }
+
+    try {
+        const response = await fetch('https://api.openai.com/v1/chat/completions', options)
+        const data = await response.json();
+        console.log(data);
+        outputElement.textContent = data.choices[0]['message']['content'];
+        if (data.choices[0]['message']['content']) {
+            const pElem = document.createElement('p');
+            pElem.textContent = inputElem.value;
+            historyElem.append(pElem);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+submitButton.addEventListener('click', getMessage);
+
+
+// const rl = new readline.createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+// });
+
+// async function main() {
+//     const userInput = await askQuestion("You: ");
+
+//     const completion = await openai.chat.completions.create({
+//         messages: [{ role: "user", content: userInput }],
 //         model: "gpt-3.5-turbo",
-//         messages: [{ role: "user", content: userInput }]
-//     }).then((response) => {
-//         var aiResponse = response.data.choices[0]['message']['content'];
-//         displayMessage("AI", aiResponse, "ai-message");
-//     }).catch((error) => {
-//         console.error("Error:", error);
 //     });
 
-//     document.getElementById("userInput").value = "";
-// }
+//     console.log("AI: " + completion.choices[0]['message']['content']);
+//     main();
+// };
 
-// function displayMessage(sender, message, className) {
-//     var chatBox = document.getElementById("chat-box");
-//     var messageDiv = document.createElement("div");
-//     messageDiv.textContent = sender + ": " + message;
-//     messageDiv.classList.add("message");
-//     messageDiv.classList.add(className);
-//     chatBox.appendChild(messageDiv);
-//     chatBox.scrollTop = chatBox.scrollHeight;
-// }
+// function askQuestion(question) {
+//     return new Promise((resolve, reject) => {
+//         rl.question(question, (answer) => {
+//             resolve(answer);
+//         });
+//     });
+// };
 
-const rl = new readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+// main();
 
-async function main() {
-    const userInput = await askQuestion("You: ");
-
-    const completion = await openai.chat.completions.create({
-        messages: [{ role: "user", content: userInput }],
-        model: "gpt-3.5-turbo",
-    });
-
-    console.log("AI: " + completion.choices[0]['message']['content']);
-    main();
-};
-
-function askQuestion(question) {
-    return new Promise((resolve, reject) => {
-        rl.question(question, (answer) => {
-            resolve(answer);
-        });
-    });
-};
-
-main();
-
-rl.on("close", () => {
-    console.log("\nbye ;(");
-    process.exit(0);
-});
+// rl.on("close", () => {
+//     console.log("\nbye ;(");
+//     process.exit(0);
+// });

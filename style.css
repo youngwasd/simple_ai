@@ -1,25 +1,106 @@
-body {
-    background-color: black;
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
     color: white;
+    font-family: 'Arvo', Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    display: flex;
+}
+
+h1 {
+    font-size: 33px;
+    font-weight: 600;
+    padding: 200px 0;
+}
+
+.side-bar {
+    background-color: slategrey;
+    width: 244px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main {
+    width: 100%;
+    flex-grow: 1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    justify-content: space-between;
 }
 
-.chat-box {
-    height: 300px;
-    overflow-y: scroll;
-    border: 1px solid #ccc;
+.bottom-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 11px;
     padding: 10px;
-    margin-bottom: 10px;
 }
 
-.message {
-    margin-bottom: 5px;
+input {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 100%;
+    font-size: 20px;
+    padding: 12px 15px;
+    border-radius: 5px;
 }
 
-.user-message {
-    color: blue;
+input:focus {
+    outline: none;
 }
 
-.ai-message {
-    color: green;
+.input-container {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+}
+
+.input-container #submit {
+    position: absolute;
+    right: 1.5%;
+    bottom: 15px;
+    cursor: pointer;
+}
+
+button {
+    background-color: transparent;
+    border: solid 0.5px;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.nav {
+    border-top: solid 0.5px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.history {
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.history p {
+    cursor: pointer;
 }
