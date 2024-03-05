@@ -8,7 +8,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: black;
+    background-color: #292727;
     display: flex;
 }
 
@@ -16,15 +16,6 @@ h1 {
     font-size: 33px;
     font-weight: 600;
     padding: 200px 0;
-}
-
-.side-bar {
-    background-color: slategrey;
-    width: 244px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .main {
@@ -85,22 +76,4 @@ button {
     border-radius: 5px;
     padding: 10px;
     margin: 10px;
-}
-
-.nav {
-    border-top: solid 0.5px;
-    padding: 10px;
-    margin: 10px;
-}
-
-.history {
-    padding: 10px;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.history p {
-    cursor: pointer;
 }
