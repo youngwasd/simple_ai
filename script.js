@@ -1,4 +1,4 @@
-const API_KEY = 'add key here';
+const API_KEY = 'key';
 
 const submitButton = document.querySelector('#submit');
 const outputElement = document.querySelector('#output');
@@ -38,7 +38,7 @@ async function getMessage() {
             console.error(error);
         }
     } else {
-        outputElement.textContent += "\nInvalid input please try again\n"
+        outputElement.textContent += "Invalid input please try again\n\n"
     }
 }
 
