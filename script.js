@@ -20,7 +20,7 @@ async function getMessage() {
             body: JSON.stringify({
                 model: "gpt-3.5-turbo",
                 messages: [{ role: "user", content: asker}],
-                max_tokens: 100
+                //max_tokens: 100
             })
         }
     
